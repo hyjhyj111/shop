@@ -5,8 +5,6 @@ import Fileio.*;
 import shopDb.*;
 public class Main {
     public static void main(String[] args) throws IOException {
-        while(true) {
-            Shop.chooseMenu();
-        }
+        Shop.chooseMenu();
     }
 }

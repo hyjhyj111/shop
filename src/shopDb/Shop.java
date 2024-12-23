@@ -1,5 +1,5 @@
 package shopDb;
-import Fileio.userFile;
+import Fileio.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -10,54 +10,83 @@ import java.util.regex.Pattern;
 public class Shop {
     public static Scanner sc = new Scanner(System.in);
     public static void chooseMenu() throws FileNotFoundException {
-        System.out.println("*****欢迎进入电子商城*****");
-        System.out.println("     1.注册            ");
-        System.out.println("     2.登录            ");
-        System.out.println("     3.查看商城         ");
-        System.out.println("     4.查看我购买的商品   ");
-        System.out.println("     5.管理员登录        ");
-        System.out.println("     6.退出系统         ");
-        System.out.println("***********************");
-        System.out.println("请选择菜单");
-        int choice = sc.nextInt();
-        System.out.print("您选择的菜单是：");
-        switch (choice){
-            case 1:
-                System.out.println("注册");
-                User.register(sc);
-                break;
-            case 2:
-                System.out.println("登录");
-               User.login(sc);
-                break;
-            case 3:
-                System.out.println("查看商城");
-                break;
-            case 4:
-                System.out.println("查看我购买的商品");
-                break;
-            case 5:
-                System.out.println("管理员登录");
-                adminLogin();
-                break;
-            case 6:
-                System.out.println("退出系统");
-                System.out.println("谢谢使用");
-                System.exit(0);
-                break;
-            default:
-                System.out.println("您输入的选项不存在请重新输入：");
-                break;
+        String username = null;
+        while (true) {
+            System.out.println("*****欢迎进入电子商城*****");
+            System.out.println("     1.注册            ");
+            System.out.println("     2.登录            ");
+            System.out.println("     3.查看商城         ");
+            System.out.println("     4.查看我购买的商品   ");
+            System.out.println("     5.管理员登录        ");
+            System.out.println("     6.退出系统         ");
+            System.out.println("***********************");
+            System.out.print("请选择菜单:");
+            int choice = sc.nextInt();
+            switch (choice){
+                case 1:
+                    System.out.println("您选择的菜单是：注册");
+                    User.register(sc);
+                    break;
+                case 2:
+                    System.out.println("您选择的菜单是：登录");
+                    username = User.login(sc);
+                    break;
+                case 3:
+                    if (username == null) {
+                        System.out.println("请登陆");
+                        break;
+                    }
+                    System.out.println("您选择的菜单是：查看商城");
+                    check();
+                    break;
+                case 4:
+                    if (username == null) {
+                        System.out.println("请登陆");
+                        break;
+                    }
+                    System.out.println("您选择的菜单是：查看我购买的商品");
+                    showPurchased(username);
+                    break;
+                case 5:
+                    System.out.println("您选择的菜单是：管理员登录");
+                    adminLogin();
+                    adminMenu();
+                    break;
+                case 6:
+                    System.out.println("退出系统");
+                    System.out.println("谢谢使用");
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("您输入的选项不存在请重新输入：");
+                    break;
+            }
         }
     }
 
+    private static void check() throws FileNotFoundException {
+        ArrayList<Good> goods = goodFile.load();
+        for (Good good : goods) {
+            System.out.println(good);
+        }
+    }
+
+    private static void showPurchased(String username) throws FileNotFoundException {
+        ArrayList<his> arr = purchaseRecord.load();
+        for (his h : arr) {
+            if (h.getUsername().equals(username)) {
+                System.out.println(h.toString2());
+            }
+        }
+    }
+    
     private static void adminLogin() {
         boolean isValid = false;
         do {
-            System.out.print("请输入管理员用户名：");
+            System.out.println("请输入管理员用户名：");
             String adminUsername = sc.next();
 
-            System.out.print("请输入管理员密码：");
+            System.out.println("请输入管理员密码：");
             String adminPassword = sc.next();
 
             if ("admin".equals(adminUsername) && "admin".equals(adminPassword)) {
@@ -81,10 +110,10 @@ public class Shop {
             System.out.println("*******************");
             System.out.println("请选择菜单");
             int choice = sc.nextInt();
-            sc.nextLine(); // Consume newline left-over
             System.out.print("您选择的菜单是：");
             switch (choice) {
                 case 1:
+
                     ;
                     break;
                 case 2:

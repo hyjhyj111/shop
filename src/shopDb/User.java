@@ -69,7 +69,7 @@ public class User {
         String confirmPassword = sc.next();
         if (!password.equals(confirmPassword)) {
             System.out.println("两次输入的密码不一致，请重新尝试注册。");
-            return;
+            return ;
         }
 
         User newUser = new User(username, password);
@@ -78,7 +78,7 @@ public class User {
         System.out.println("注册成功！");
     }
 
-    public static void login(Scanner sc) throws FileNotFoundException {
+    public static String login(Scanner sc) throws FileNotFoundException {
         List<User> users = userFile.load();
         System.out.println("请输入用户名：");
         String username = sc.next();
@@ -89,10 +89,11 @@ public class User {
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 System.out.println("登录成功！");
-                return;
+                return username;
             }
         }
         System.out.println("用户名或密码错误，请重新输入。");
+        return null;
     }
 
     private static boolean isValidUsername(String username) {

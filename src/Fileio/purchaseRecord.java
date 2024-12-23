@@ -1,7 +1,5 @@
 package Fileio;
 
-import shopDb.Good;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -35,22 +33,3 @@ public class purchaseRecord {
     }
 }
 
-class his{
-    private String username;
-    private int id;
-    private String name;
-    private double price;
-    private int num;
-    public his(String username, int id, String name, double price, int num) {
-        this.username = username;
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.num = num;
-    }
-
-    @Override
-    public String toString() {
-        return username+","+id+","+name+","+price+","+num;
-    }
-}
