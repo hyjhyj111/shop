@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class purchaseRecord {
-    protected static final String file_path = "gooddata";
+    protected static final String file_path = "hisdata";
 
     public static ArrayList<his> load() throws FileNotFoundException {
         File file = new File(file_path);
