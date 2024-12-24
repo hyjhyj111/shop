@@ -2,6 +2,7 @@ package DbManger;
 
 import Fileio.his;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class hisManager {
                 String username = resultSet.getString("username");
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                double price = resultSet.getDouble("price");
+                BigDecimal price = resultSet.getBigDecimal("price");
                 int num = resultSet.getInt("num");
 
                 goods.add(new his(username, id, name, price, num));
@@ -50,7 +51,7 @@ public class hisManager {
                 preparedStatement.setString(1, good.getUsername());
                 preparedStatement.setInt(2, good.getId());
                 preparedStatement.setString(3, good.getName());
-                preparedStatement.setDouble(4, good.getPrice());
+                preparedStatement.setBigDecimal(4, good.getPrice());
                 preparedStatement.setInt(5, good.getNum());
                 preparedStatement.executeUpdate();
             }

@@ -1,13 +1,15 @@
 package Fileio;
 
+import java.math.BigDecimal;
+
 public class his {
     private String username;
     private int id;
     private String name;
-    private double price;
+    private BigDecimal price;
     private int num;
 
-    public his(String username, int id, String name, double price, int num) {
+    public his(String username, int id, String name, BigDecimal price, int num) {
         this.username = username;
         this.id = id;
         this.name = name;
@@ -23,7 +25,7 @@ public class his {
         return num;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 

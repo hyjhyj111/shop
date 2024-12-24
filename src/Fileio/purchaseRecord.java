@@ -3,6 +3,7 @@ package Fileio;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class purchaseRecord {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] split = line.split(",");
-            hiss.add(new his(split[0], Integer.parseInt(split[1]), split[2], Double.parseDouble(split[3]), Integer.parseInt(split[4])));
+            hiss.add(new his(split[0], Integer.parseInt(split[1]), split[2], new BigDecimal(split[3]), Integer.parseInt(split[4])));
         }
         return hiss;
     }

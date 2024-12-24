@@ -2,6 +2,7 @@ package DbManger;
 
 import shopDb.Good;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class goodManager {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
-                double price = resultSet.getDouble("price");
+                BigDecimal price = resultSet.getBigDecimal("price");
                 int num = resultSet.getInt("num");
                 goods.add(new Good(id, name, price, num));
             }
@@ -46,7 +47,7 @@ public class goodManager {
             for (Good good : goods) {
                 upsertStatement.setInt(1, good.getId());
                 upsertStatement.setString(2, good.getName());
-                upsertStatement.setDouble(3, good.getPrice());
+                upsertStatement.setBigDecimal(3, good.getPrice());
                 upsertStatement.setInt(4, good.getNum());
                 upsertStatement.executeUpdate();
             }

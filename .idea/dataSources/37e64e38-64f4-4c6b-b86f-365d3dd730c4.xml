@@ -1011,7 +1011,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="292" parent="1" name="table">
-      <LastIntrospectionLocalTimestamp>2024-12-24.07:47:30</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-12-24.10:23:29</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="293" parent="1" name="mysql.infoschema">
@@ -1056,7 +1056,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </column>
     <column id="302" parent="297" name="price">
       <Position>3</Position>
-      <StoredType>decimal(10)|0s</StoredType>
+      <StoredType>decimal(40,6 digit)|0s</StoredType>
     </column>
     <column id="303" parent="297" name="num">
       <Position>4</Position>

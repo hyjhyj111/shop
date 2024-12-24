@@ -4,6 +4,7 @@ import DbManger.hisManager;
 import Fileio.*;
 
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -92,7 +93,7 @@ public class Shop {
                             t.setNum(num);
                             goods.get(ind).setNum(goods.get(ind).getNum() - num);
                             System.out.println(t.s());
-                            System.out.println("总价格为: " + num * t.getPrice());
+                            System.out.println("总价格为: " + t.getPrice().multiply(new BigDecimal(num)));
 
                             his.add(new his(username, t.getId(), t.getName(), t.getPrice(), t.getNum()));
                             break;

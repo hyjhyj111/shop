@@ -2,15 +2,17 @@ package shopDb;
 
 import DbManger.goodManager;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Good {
     private int id;
     private String name;
-    private double price;
+    private BigDecimal price;
     private int num;
-    public Good(int id, String name, double price, int num) {
+    public Good(int id, String name, BigDecimal price, int num) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -34,7 +36,7 @@ public class Good {
         return num;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -44,17 +46,23 @@ public class Good {
 
     @Override
     public String toString() {
-        return id + "," + name + "," + price + "," + num;
+        return id + "," + name + "," + price.setScale(3, RoundingMode.HALF_UP) + "," + num;
     }
     public String s() {
-        return "Good [id=" + id + ", name=" + name + ", price=" + price + ", num=" + num + "]";
+        return String.format(
+                "Good [id=%-5d, name=%-10s, price=%-10.3f, num=%-5d]",
+                id,
+                name,
+                price.setScale(3, RoundingMode.HALF_UP),
+                num
+        );
     }
 
     public static void Goodadd(Scanner sc) {
         ArrayList<Good> goods = goodManager.load();
         int id,num;
         String name;
-        double price;
+        BigDecimal price;
         String choic = "";
 
         do{
@@ -69,23 +77,23 @@ public class Good {
                 continue;
             }
             System.out.print("请输入商品价格:");
-            price = sc.nextDouble();
+            price = sc.nextBigDecimal();
             System.out.print("请输入商品数量:");
             num = sc.nextInt();
             System.out.println("*********商品添加成功!*********");
             Good newGood = new Good(id,name,price,num);
             goods.add(newGood);
             goodManager.save(goods);
-            System.out.println("是否继续添加?Y/N");
+            System.out.println("是否继续添加?y/n");
             choic = sc.next();
-        }while(choic.equals("Y"));
+        }while(choic.equals("Y") || choic.equals("y"));
     }
 
     public static void modifygoods(Scanner sc) {
         int ID;
         String name1;
         String choic="Y";
-        double price1;
+        BigDecimal price1;
         int num1;
         ArrayList<Good> goods = goodManager.load();
 
@@ -102,7 +110,7 @@ public class Good {
                     System.out.print("请输入商品名称:");
                     name1 = sc.next();
                     System.out.print("请输入商品价格:");
-                    price1 = sc.nextDouble();
+                    price1 = sc.nextBigDecimal();
                     System.out.print("请输入商品数量:");
                     num1 = sc.nextInt();
                     goods.remove(good);
@@ -115,10 +123,10 @@ public class Good {
             else{
                 System.out.println("修改成功!");
 
-                System.out.println("是否继续修改?Y/N");
+                System.out.println("是否继续修改?y/n");
                 choic = sc.next();
             }
-        }while(choic.equals("Y"));
+        }while(choic.equals("Y") || choic.equals("y"));
     }
 
     public static void delete(Scanner sc) {
@@ -139,9 +147,9 @@ public class Good {
                     System.out.println("商品ID\t商品名称\t商品价格\t商品数量");
                     flag=1;
                     System.out.printf("%-8d%-8s%-8.2f%-8d\n",good.id,good.name,good.price,good.num);
-                    System.out.println("是否确认删除?Y/N");
+                    System.out.println("是否确认删除?y/n");
                     confirm = sc.next();
-                    if(confirm.equals("Y")){
+                    if(confirm.equals("Y") || confirm.equals("y")){
                         goods.remove(good);
                         goodManager.save(goods);
 
@@ -154,13 +162,13 @@ public class Good {
             else if(flag==1){
                 System.out.println("*******商品删除成功******");
 
-                System.out.println("是否继续删除商品?Y/N");
+                System.out.println("是否继续删除商品?y/n");
                 choic = sc.next();
             }else{
                 System.out.println("取消删除");
                 break;
             }
-        }while(choic.equals("Y"));
+        }while(choic.equals("Y") || choic.equals("y"));
 
     }
     private static boolean isExist(int id ,String name,ArrayList<Good>goods){
@@ -179,10 +187,10 @@ public class Good {
         for(Good good:goods){
             System.out.printf("%-8d%-8s%-8.2f%-8d\n",good.id,good.name,good.price,good.num);
         }
-        System.out.println("是否按价格排序?Y/N");
+        System.out.println("是否按价格排序?y/n");
         choice = sc.next();
-        if(choice.equals("Y")){
-            goods.sort((a, b) -> Double.compare(b.price, a.price));
+        if(choice.equals("Y") || choice.equals("y")){
+            goods.sort((a, b) -> a.getPrice().compareTo(b.getPrice()));
             System.out.println("商品ID\t商品名称\t商品价格\t商品数量");
             for(Good good:goods){
                 System.out.printf("%-8d%-8s%-8.2f%-8d\n",good.id,good.name,good.price,good.num);

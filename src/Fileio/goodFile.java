@@ -6,6 +6,7 @@ import shopDb.Good;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class goodFile {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] split = line.split(",");
-            goods.add(new Good(Integer.parseInt(split[0]), split[1], Double.parseDouble(split[2]), Integer.parseInt(split[3])));
+            goods.add(new Good(Integer.parseInt(split[0]), split[1], new BigDecimal(split[2]), Integer.parseInt(split[3])));
         }
         return goods;
     }
