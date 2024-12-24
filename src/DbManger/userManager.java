@@ -77,7 +77,6 @@ public class userManager {
             selectStatement.close();
             connection.close();
 
-            System.out.println("用户数据已成功同步！");
         } catch (SQLException e) {
             e.printStackTrace();
         }

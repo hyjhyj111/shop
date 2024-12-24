@@ -2,7 +2,6 @@ package shopDb;
 
 import DbManger.userManager;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -28,20 +27,12 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     // password的getter和setter
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public static void register(Scanner sc) throws FileNotFoundException {
+    public static void register(Scanner sc) {
         String username;
         ArrayList<User> users = userManager.load();
         do {
@@ -78,7 +69,7 @@ public class User {
         System.out.println("注册成功！");
     }
 
-    public static String login(Scanner sc) throws FileNotFoundException {
+    public static String login(Scanner sc) {
         List<User> users = userManager.load();
         System.out.println("请输入用户名：");
         String username = sc.next();

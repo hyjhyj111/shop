@@ -81,7 +81,6 @@ public class hisManager {
             selectStatement.close();
             connection.close();
 
-            System.out.println("数据库已成功同步！");
         } catch (SQLException e) {
             e.printStackTrace();
         }

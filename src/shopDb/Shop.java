@@ -1,13 +1,11 @@
 package shopDb;
 import DbManger.goodManager;
 import DbManger.hisManager;
-import DbManger.userManager;
 import Fileio.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 public class Shop {
     public static Scanner sc = new Scanner(System.in);
@@ -22,7 +20,7 @@ public class Shop {
             System.out.println("     5.管理员登录        ");
             System.out.println("     6.退出系统         ");
             System.out.println("***********************");
-            System.out.print("请选择菜单:");
+            System.out.println("请选择菜单:");
             int choice = sc.nextInt();
             switch (choice){
                 case 1:
@@ -66,7 +64,7 @@ public class Shop {
         }
     }
 
-    private static void check(Scanner sc, String username) throws FileNotFoundException {
+    private static void check(Scanner sc, String username) {
         ArrayList<Good> goods = goodManager.load(); // 加载商品列表
         ArrayList<his> his = hisManager.load();
 
@@ -120,7 +118,7 @@ public class Shop {
         hisManager.save(his);
     }
 
-    private static void showPurchased(String username) throws FileNotFoundException {
+    private static void showPurchased(String username) {
         ArrayList<his> arr = hisManager.load();
         for (his h : arr) {
             if (h.getUsername().equals(username)) {
@@ -129,26 +127,7 @@ public class Shop {
         }
     }
 
-    private static boolean isValidUsername(String username) {
-        return username.length() >= 3;
-    }
-
-    private static boolean isValidPassword(String password) {
-        Pattern pattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d).{6,}$");
-        return pattern.matcher(password).matches();
-    }
-
-    private static boolean isUsernameExists(String username) throws FileNotFoundException {
-        ArrayList<User> users = userManager.load();
-        for (User user : users) {
-            if (user.getUsername().equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static int isExistId(int id) throws FileNotFoundException {
+    private static int isExistId(int id) {
         ArrayList<Good> goods = goodManager.load();
         for (int ind = 0; ind < goods.size(); ind++) {
             if (goods.get(ind).getId() == id) {

@@ -2,7 +2,6 @@ package shopDb;
 
 import DbManger.goodManager;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,7 +50,7 @@ public class Good {
         return "Good [id=" + id + ", name=" + name + ", price=" + price + ", num=" + num + "]";
     }
 
-    public static void Goodadd(Scanner sc) throws FileNotFoundException {
+    public static void Goodadd(Scanner sc) {
         ArrayList<Good> goods = goodManager.load();
         int id,num;
         String name;
@@ -82,7 +81,7 @@ public class Good {
         }while(choic.equals("Y"));
     }
 
-    public static void modifygoods(Scanner sc) throws FileNotFoundException {
+    public static void modifygoods(Scanner sc) {
         int ID;
         String name1;
         String choic="Y";
@@ -122,7 +121,7 @@ public class Good {
         }while(choic.equals("Y"));
     }
 
-    public static void delete(Scanner sc) throws FileNotFoundException {
+    public static void delete(Scanner sc) {
         int ID;
         String name1;
         String choic="Y";
@@ -171,7 +170,7 @@ public class Good {
         return false;
     }
 
-    public static void List(Scanner sc) throws FileNotFoundException {
+    public static void List(Scanner sc) {
         String choice;
         System.out.println("********商品列表*******");
         ArrayList<Good> goods = goodManager.load();
