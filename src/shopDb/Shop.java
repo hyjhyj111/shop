@@ -73,13 +73,16 @@ public class Shop {
 
     private static void showPurchased(String username) throws FileNotFoundException {
         ArrayList<his> arr = purchaseRecord.load();
+        double sum = 0;
         for (his h : arr) {
             if (h.getUsername().equals(username)) {
                 System.out.println(h.toString2());
+                sum += h.getNum() * h.getPrice();
             }
         }
+        System.out.println("总价值为:" + sum);
     }
-    
+
     private static void adminLogin() {
         boolean isValid = false;
         do {

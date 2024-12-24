@@ -19,13 +19,21 @@ public class his {
         return username;
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
     @Override
     public String toString() {
         return username + "," + id + "," + name + "," + price + "," + num;
     }
 
     public String toString2() {
-        return "[id=" + id + ", name=" + name + ", price=" + price + ", num=" + num + "]";
+        return "Good [id=" + id + ", name=" + name + ", price=" + price + ", num=" + num + "]";
     }
 
 }

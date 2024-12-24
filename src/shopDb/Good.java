@@ -14,4 +14,9 @@ public class Good {
     public void add(){
         num ++;
     }
+
+    @Override
+    public String toString() {
+        return "Good [id=" + id + ", name=" + name + ", price=" + price + ", num=" + num + "]";
+    }
 }
