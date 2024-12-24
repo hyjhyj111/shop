@@ -75,7 +75,7 @@
       <updated>1734958224544</updated>
       <workItem from="1734958225551" duration="2327000" />
       <workItem from="1734960662493" duration="3133000" />
-      <workItem from="1735002051757" duration="8431000" />
+      <workItem from="1735002051757" duration="9238000" />
     </task>
     <servers />
   </component>
@@ -89,11 +89,6 @@
           <url>file://$PROJECT_DIR$/src/shopDb/Shop.java</url>
           <line>87</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/DbManger/goodManager.java</url>
-          <line>12</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
