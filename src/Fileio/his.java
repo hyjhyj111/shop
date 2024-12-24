@@ -27,6 +27,14 @@ public class his {
         return price;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return username + "," + id + "," + name + "," + price + "," + num;

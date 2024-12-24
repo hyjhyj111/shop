@@ -21,7 +21,7 @@ public class purchaseRecord {
         return hiss;
     }
 
-    public static void save(ArrayList<his> hiss) throws FileNotFoundException {
+    public static void save(ArrayList<his> hiss) {
         File file = new File(file_path);
         try (PrintWriter printWriter = new PrintWriter(file)) {
             for (his  h : hiss) {

@@ -1,9 +1,11 @@
 package shopDb;
+import DbManger.goodManager;
+import DbManger.hisManager;
+import DbManger.userManager;
 import Fileio.*;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -37,7 +39,7 @@ public class Shop {
                         break;
                     }
                     System.out.println("您选择的菜单是：查看商城");
-                    check();
+                    check(sc, username);
                     break;
                 case 4:
                     if (username == null) {
@@ -49,8 +51,8 @@ public class Shop {
                     break;
                 case 5:
                     System.out.println("您选择的菜单是：管理员登录");
-                    adminLogin();
-                    adminMenu();
+                    Admin.adminLogin(sc);
+                    Admin.adminMenu(sc);
                     break;
                 case 6:
                     System.out.println("退出系统");
@@ -64,80 +66,68 @@ public class Shop {
         }
     }
 
-    private static void check() throws FileNotFoundException {
-        ArrayList<Good> goods = goodFile.load();
-        for (Good good : goods) {
-            System.out.println(good);
+    private static void check(Scanner sc, String username) throws FileNotFoundException {
+        ArrayList<Good> goods = goodManager.load(); // 加载商品列表
+        ArrayList<his> his = hisManager.load();
+
+        while (true) {
+            // 显示商品信息
+            for (Good good : goods) {
+                System.out.println(good.s());
+            }
+            System.out.println("请输入您要购买的商品编号:");
+
+            int id;
+            while (true) {
+                id = sc.nextInt(); // 输入商品编号
+                int ind = isExistId(id); // 检查商品是否存在
+                if (ind != -1) {  // 如果商品存在
+                    System.out.println("请输入购买数量:");
+                    int num;
+                    while (true) {
+                        num = sc.nextInt(); // 输入购买数量
+                        if (num >= 1 && num <= goods.get(ind).getNum()) {
+                            // 显示购买成功信息
+                            System.out.println("******* 商品购买成功! *******");
+                            System.out.println("********** 您购买的商品列表如下 *********");
+                            Good t = new Good(goods.get(ind));
+                            t.setNum(num);
+                            goods.get(ind).setNum(goods.get(ind).getNum() - num);
+                            System.out.println(t.s());
+                            System.out.println("总价格为: " + num * t.getPrice());
+
+                            his.add(new his(username, t.getId(), t.getName(), t.getPrice(), t.getNum()));
+                            break;
+                        } else {
+                            System.out.println("购买数量无效，请重新输入:");
+                        }
+                    }
+                    break;
+                } else {
+                    System.out.println("商品编号不存在，请重新输入:");
+                }
+            }
+
+            // 询问是否继续购买
+            System.out.println("是否继续购买商品？(y/n)");
+            String choice = sc.next();
+            if (!choice.equalsIgnoreCase("y")) {
+                System.out.println("谢谢您的购买！");
+                break;
+            }
         }
+        goodManager.save(goods);
+        hisManager.save(his);
     }
 
     private static void showPurchased(String username) throws FileNotFoundException {
-        ArrayList<his> arr = purchaseRecord.load();
-        double sum = 0;
+        ArrayList<his> arr = hisManager.load();
         for (his h : arr) {
             if (h.getUsername().equals(username)) {
                 System.out.println(h.toString2());
-                sum += h.getNum() * h.getPrice();
-            }
-        }
-        System.out.println("总价值为:" + sum);
-    }
-
-    private static void adminLogin() {
-        boolean isValid = false;
-        do {
-            System.out.println("请输入管理员用户名：");
-            String adminUsername = sc.next();
-
-            System.out.println("请输入管理员密码：");
-            String adminPassword = sc.next();
-
-            if ("admin".equals(adminUsername) && "admin".equals(adminPassword)) {
-                System.out.println("管理员登陆成功！");
-                isValid = true;
-            } else {
-                System.out.println("管理员用户名或密码错误，请重新输入。");
-            }
-        }while(!isValid);
-    }
-
-    private static void adminMenu(){
-        boolean adminFlag = true;
-        while (adminFlag) {
-            System.out.println("*****管理员菜单*****");
-            System.out.println("     1.添加商品 ");
-            System.out.println("     2.修改商品 ");
-            System.out.println("     3.删除商品 ");
-            System.out.println("     4.查看商品列表 ");
-            System.out.println("     5.返回主菜单");
-            System.out.println("*******************");
-            System.out.println("请选择菜单");
-            int choice = sc.nextInt();
-            System.out.print("您选择的菜单是：");
-            switch (choice) {
-                case 1:
-
-                    ;
-                    break;
-                case 2:
-                    ;
-                    break;
-                case 3:
-                    ;
-                    break;
-                case 4:
-                    ;
-                    break;
-                case 5:
-                    adminFlag = false;
-                    break;
-                default:
-                    System.out.println("您输入的选项不存在请重新输入：");
-                    break;
             }
         }
     }
-
 
     private static boolean isValidUsername(String username) {
         return username.length() >= 3;
@@ -149,12 +139,22 @@ public class Shop {
     }
 
     private static boolean isUsernameExists(String username) throws FileNotFoundException {
-        ArrayList<User> users = userFile.load();
+        ArrayList<User> users = userManager.load();
         for (User user : users) {
             if (user.getUsername().equals(username)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private static int isExistId(int id) throws FileNotFoundException {
+        ArrayList<Good> goods = goodManager.load();
+        for (int ind = 0; ind < goods.size(); ind++) {
+            if (goods.get(ind).getId() == id) {
+                return ind;
+            }
+        }
+        return -1;
     }
 }

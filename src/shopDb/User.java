@@ -1,6 +1,6 @@
 package shopDb;
 
-import Fileio.userFile;
+import DbManger.userManager;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class User {
 
     public static void register(Scanner sc) throws FileNotFoundException {
         String username;
-        ArrayList<User> users = userFile.load();
+        ArrayList<User> users = userManager.load();
         do {
             System.out.println("请输入用户名（至少3个字符）：");
             username = sc.next();
@@ -74,12 +74,12 @@ public class User {
 
         User newUser = new User(username, password);
         users.add(newUser);
-        userFile.save(users);
+        userManager.save(users);
         System.out.println("注册成功！");
     }
 
     public static String login(Scanner sc) throws FileNotFoundException {
-        List<User> users = userFile.load();
+        List<User> users = userManager.load();
         System.out.println("请输入用户名：");
         String username = sc.next();
 
