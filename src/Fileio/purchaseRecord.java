@@ -1,5 +1,7 @@
 package Fileio;
 
+import shopDb.his;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

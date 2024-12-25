@@ -1,6 +1,7 @@
-package Fileio;
+package shopDb;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class his {
     private String username;
@@ -43,7 +44,13 @@ public class his {
     }
 
     public String toString2() {
-        return "Good [id=" + id + ", name=" + name + ", price=" + price + ", num=" + num + "]";
+        return String.format(
+                "Good [id=%-5d, name=%-10s, price=%-10.3f, num=%-5d]",
+                id,
+                name,
+                price.setScale(3, RoundingMode.HALF_UP),
+                num
+        );
     }
 
 }

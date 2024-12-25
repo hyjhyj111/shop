@@ -1,7 +1,6 @@
 package shopDb;
 import DbManger.goodManager;
 import DbManger.hisManager;
-import Fileio.*;
 
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;

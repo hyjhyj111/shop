@@ -1,6 +1,6 @@
 package DbManger;
 
-import Fileio.his;
+import shopDb.his;
 
 import java.math.BigDecimal;
 import java.sql.*;

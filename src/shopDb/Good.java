@@ -190,7 +190,7 @@ public class Good {
         System.out.println("是否按价格排序?y/n");
         choice = sc.next();
         if(choice.equals("Y") || choice.equals("y")){
-            goods.sort((a, b) -> a.getPrice().compareTo(b.getPrice()));
+            goods.sort((a, b) -> b.getPrice().compareTo(a.getPrice()));
             System.out.println("商品ID\t商品名称\t商品价格\t商品数量");
             for(Good good:goods){
                 System.out.printf("%-8d%-8s%-8.2f%-8d\n",good.id,good.name,good.price,good.num);
