@@ -3,14 +3,14 @@ package shopDb;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class his {
+public class His {
     private String username;
     private int id;
     private String name;
     private BigDecimal price;
     private int num;
 
-    public his(String username, int id, String name, BigDecimal price, int num) {
+    public His(String username, int id, String name, BigDecimal price, int num) {
         this.username = username;
         this.id = id;
         this.name = name;

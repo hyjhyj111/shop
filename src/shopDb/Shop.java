@@ -66,7 +66,7 @@ public class Shop {
 
     private static void check(Scanner sc, String username) {
         ArrayList<Good> goods = goodManager.load(); // 加载商品列表
-        ArrayList<his> his = hisManager.load();
+        ArrayList<His> his = hisManager.load();
 
         while (true) {
             // 显示商品信息
@@ -94,7 +94,7 @@ public class Shop {
                             System.out.println(t.s());
                             System.out.println("总价格为: " + t.getPrice().multiply(new BigDecimal(num)));
 
-                            his.add(new his(username, t.getId(), t.getName(), t.getPrice(), t.getNum()));
+                            his.add(new His(username, t.getId(), t.getName(), t.getPrice(), t.getNum()));
                             break;
                         } else {
                             System.out.println("购买数量无效，请重新输入:");
@@ -119,8 +119,8 @@ public class Shop {
     }
 
     private static void showPurchased(String username) {
-        ArrayList<his> arr = hisManager.load();
-        for (his h : arr) {
+        ArrayList<His> arr = hisManager.load();
+        for (His h : arr) {
             if (h.getUsername().equals(username)) {
                 System.out.println(h.toString2());
             }

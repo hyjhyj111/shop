@@ -1,6 +1,6 @@
 package DbManger;
 
-import shopDb.his;
+import shopDb.His;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -11,8 +11,8 @@ public class hisManager {
     private static final String username = "root";
     private static final String password = "703527";
 
-    public static ArrayList<his> load() {
-        ArrayList<his> goods = new ArrayList<>();
+    public static ArrayList<His> load() {
+        ArrayList<His> goods = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
@@ -26,7 +26,7 @@ public class hisManager {
                 BigDecimal price = resultSet.getBigDecimal("price");
                 int num = resultSet.getInt("num");
 
-                goods.add(new his(username, id, name, price, num));
+                goods.add(new His(username, id, name, price, num));
             }
 
             resultSet.close();
@@ -38,7 +38,7 @@ public class hisManager {
         return goods;
     }
 
-    public static void save(ArrayList<his> goods) {
+    public static void save(ArrayList<His> goods) {
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
 
@@ -47,7 +47,7 @@ public class hisManager {
                     + "ON DUPLICATE KEY UPDATE name = VALUES(name), price = VALUES(price), num = VALUES(num)";
             PreparedStatement preparedStatement = connection.prepareStatement(upsertSql);
 
-            for (his good : goods) {
+            for (His good : goods) {
                 preparedStatement.setString(1, good.getUsername());
                 preparedStatement.setInt(2, good.getId());
                 preparedStatement.setString(3, good.getName());
