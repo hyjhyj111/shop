@@ -2,6 +2,7 @@ package shopDb;
 
 import DbManger.userManager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -69,13 +70,13 @@ public class User {
         System.out.println("注册成功！");
     }
 
-    public static String login(Scanner sc) {
+    public static String login(Scanner sc) throws IOException {
         List<User> users = userManager.load();
         System.out.println("请输入用户名：");
         String username = sc.next();
 
         System.out.println("请输入密码：");
-        String password = sc.next();
+        String password = PasswordInput.read(sc);
 
         for (User user : users) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
@@ -87,16 +88,16 @@ public class User {
         return null;
     }
 
-    private static boolean isValidUsername(String username) {
+    protected static boolean isValidUsername(String username) {
         return username.length() >= 3;
     }
 
-    private static boolean isValidPassword(String password) {
+    protected static boolean isValidPassword(String password) {
         Pattern pattern = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d).{6,}$");
         return pattern.matcher(password).matches();
     }
 
-    private static boolean isUsernameExists(String username, List<User> users) {
+    protected static boolean isUsernameExists(String username, ArrayList<User> users) {
         for (User user : users) {
             if (user.getUsername().equals(username)) {
                 return true;

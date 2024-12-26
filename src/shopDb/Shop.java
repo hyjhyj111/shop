@@ -3,13 +3,14 @@ import DbManger.goodManager;
 import DbManger.hisManager;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Shop {
     public static Scanner sc = new Scanner(System.in);
-    public static void chooseMenu() throws FileNotFoundException {
+    public static void chooseMenu() throws IOException {
         String username = null;
         while (true) {
             System.out.println("*****欢迎进入电子商城*****");
