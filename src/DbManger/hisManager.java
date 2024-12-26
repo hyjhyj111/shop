@@ -6,11 +6,7 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class hisManager {
-    private static final String url = "jdbc:mysql://localhost:3306/table";
-    private static final String username = "root";
-    private static final String password = "703527";
-
+public class hisManager implements Manager{
     public static ArrayList<His> load() {
         ArrayList<His> goods = new ArrayList<>();
         try {

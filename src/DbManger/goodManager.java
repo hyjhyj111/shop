@@ -6,10 +6,9 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static DbManger.Manager.*;
+
 public class goodManager {
-    private static final String url = "jdbc:mysql://localhost:3306/table";
-    public static final String username = "root";
-    public static final String password = "703527";
     public static ArrayList<Good> load() {
         ArrayList<Good> goods = new ArrayList<>();
         try{

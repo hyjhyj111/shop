@@ -6,11 +6,7 @@ import shopDb.User;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class userManager {
-    private static final String url = "jdbc:mysql://localhost:3306/table";
-    private static final String username = "root";
-    private static final String password = "703527";
-
+public class userManager implements Manager{
     // 从数据库加载用户数据
     public static ArrayList<User> load() {
         ArrayList<User> users = new ArrayList<>();
