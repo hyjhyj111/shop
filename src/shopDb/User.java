@@ -51,14 +51,14 @@ public class User {
         String password;
         do {
             System.out.println("请输入密码（必须包含字母和数字，至少6个字符）：");
-            password = sc.next();
+            password = PasswordInput.read(sc);
             if (!isValidPassword(password)) {
                 System.out.println("密码无效，请确保密码包含字母和数字并且至少6个字符长。");
             }
         } while (!isValidPassword(password));
 
         System.out.println("请确认密码：");
-        String confirmPassword = sc.next();
+        String confirmPassword = PasswordInput.read(sc);
         if (!password.equals(confirmPassword)) {
             System.out.println("两次输入的密码不一致，请重新尝试注册。");
             return ;

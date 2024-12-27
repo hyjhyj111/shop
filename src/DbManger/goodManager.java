@@ -25,7 +25,7 @@ public class goodManager implements Manager{
             resultSet.close();
             statement.close();
             connection.close();
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

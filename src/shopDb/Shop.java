@@ -126,11 +126,15 @@ public class Shop {
 
     private static void showPurchased(String username) {
         ArrayList<His> arr = hisManager.load();
-        if (arr.isEmpty()) System.out.println("无购买历史");
+        ArrayList<String> ans = new ArrayList<>();
         for (His h : arr) {
             if (h.getUsername().equals(username)) {
-                System.out.println(h.toString2());
+                ans.add(h.toString2());
             }
+        }
+        if (ans.isEmpty()) System.out.println("无购买历史");
+        for (String s : ans) {
+            System.out.println(s);
         }
     }
 

@@ -36,46 +36,33 @@ public class hisManager implements Manager{
 
     public static void save(ArrayList<His> goods) {
         try {
+            // 建立数据库连接
             Connection connection = DriverManager.getConnection(url, username, password);
 
-            // 更新或插入数据
-            String upsertSql = "INSERT INTO purchaseRecord (username, id, name, price, num) VALUES (?, ?, ?, ?, ?) "
-                    + "ON DUPLICATE KEY UPDATE name = VALUES(name), price = VALUES(price), num = VALUES(num)";
-            PreparedStatement preparedStatement = connection.prepareStatement(upsertSql);
+            // 1. 删除所有数据
+            String deleteSql = "TRUNCATE TABLE purchaseRecord"; // 更高效
+            Statement deleteStatement = connection.createStatement();
+            deleteStatement.executeUpdate(deleteSql);
+            deleteStatement.close();
+
+            // 2. 插入新数据
+            String insertSql = "INSERT INTO purchaseRecord (username, id, name, price, num) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
 
             for (His good : goods) {
+                // 设置参数
                 preparedStatement.setString(1, good.getUsername());
                 preparedStatement.setInt(2, good.getId());
                 preparedStatement.setString(3, good.getName());
                 preparedStatement.setBigDecimal(4, good.getPrice());
                 preparedStatement.setInt(5, good.getNum());
+
+                // 执行插入操作
                 preparedStatement.executeUpdate();
             }
 
-            // 删除数据库中多余的数据
-            String selectSql = "SELECT id FROM purchaseRecord";
-            Statement selectStatement = connection.createStatement();
-            ResultSet resultSet = selectStatement.executeQuery(selectSql);
-
-            ArrayList<Integer> databaseIds = new ArrayList<>();
-            while (resultSet.next()) {
-                databaseIds.add(resultSet.getInt("id"));
-            }
-
-            for (int dbId : databaseIds) {
-                boolean existsInGoods = goods.stream().anyMatch(good -> good.getId() == dbId);
-                if (!existsInGoods) {
-                    String deleteSql = "DELETE FROM student WHERE id = ?";
-                    PreparedStatement deleteStatement = connection.prepareStatement(deleteSql);
-                    deleteStatement.setInt(1, dbId);
-                    deleteStatement.executeUpdate();
-                    deleteStatement.close();
-                }
-            }
-
+            // 关闭资源
             preparedStatement.close();
-            resultSet.close();
-            selectStatement.close();
             connection.close();
 
         } catch (SQLException e) {
