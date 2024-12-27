@@ -1,6 +1,6 @@
 package shopDb;
 
-import DbManger.userManager;
+import dbManger.userManager;
 
 import java.io.IOException;
 import java.util.ArrayList;

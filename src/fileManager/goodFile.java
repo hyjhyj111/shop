@@ -1,13 +1,11 @@
-package Fileio;
+package fileManager;
 
-import shopDb.Good;
 import shopDb.Good;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 

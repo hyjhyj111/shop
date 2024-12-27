@@ -1,4 +1,4 @@
-package DbManger;
+package dbManger;
 
 import shopDb.Good;
 
@@ -6,9 +6,7 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
-import static DbManger.Manager.*;
-
-public class goodManager {
+public class goodManager implements Manager{
     public static ArrayList<Good> load() {
         ArrayList<Good> goods = new ArrayList<>();
         try{

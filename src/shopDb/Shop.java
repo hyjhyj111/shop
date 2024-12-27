@@ -1,7 +1,7 @@
 package shopDb;
 
-import DbManger.goodManager;
-import DbManger.hisManager;
+import dbManger.goodManager;
+import dbManger.hisManager;
 
 import java.io.IOException;
 import java.math.BigDecimal;

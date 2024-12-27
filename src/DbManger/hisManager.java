@@ -1,4 +1,4 @@
-package DbManger;
+package dbManger;
 
 import shopDb.His;
 

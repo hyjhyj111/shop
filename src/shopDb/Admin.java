@@ -1,8 +1,7 @@
 package shopDb;
 
-import DbManger.userManager;
+import dbManger.userManager;
 
-import javax.swing.*;
 import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.IOException;

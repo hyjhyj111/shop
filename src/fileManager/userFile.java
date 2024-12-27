@@ -1,4 +1,4 @@
-package Fileio;
+package fileManager;
 
 import shopDb.User;
 import java.io.*;

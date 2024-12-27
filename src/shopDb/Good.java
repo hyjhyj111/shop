@@ -1,6 +1,6 @@
 package shopDb;
 
-import DbManger.goodManager;
+import dbManger.goodManager;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
