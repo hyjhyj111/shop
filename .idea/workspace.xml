@@ -84,22 +84,11 @@
       <workItem from="1735178272755" duration="352000" />
       <workItem from="1735178632131" duration="5338000" />
       <workItem from="1735200505596" duration="4123000" />
-      <workItem from="1735265680199" duration="8378000" />
+      <workItem from="1735265680199" duration="10638000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/shopDb/Shop.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
