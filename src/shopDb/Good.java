@@ -183,7 +183,7 @@ public class Good {
         System.out.println("********商品列表*******");
         ArrayList<Good> goods = goodManager.load();
         goods.sort((a, b) -> Integer.compare(a.id, b.id));
-        System.out.println("商品ID\t商品名称\t商品价格\t商品数量");
+        System.out.printf("%-8s%-8s%-8s%-8s\n", "ID", "NAME", "PRICE", "NUM");
         for(Good good:goods){
             System.out.printf("%-8d%-8s%-8.2f%-8d\n",good.id,good.name,good.price,good.num);
         }

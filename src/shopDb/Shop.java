@@ -1,8 +1,8 @@
 package shopDb;
+
 import DbManger.goodManager;
 import DbManger.hisManager;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,7 +19,8 @@ public class Shop {
             System.out.println("     3.查看商城         ");
             System.out.println("     4.查看我购买的商品   ");
             System.out.println("     5.管理员登录        ");
-            System.out.println("     6.退出系统         ");
+            System.out.println("     6.切换用户         ");
+            System.out.println("     7.退出系统         ");
             System.out.println("***********************");
             System.out.println("请选择菜单:");
             int choice = sc.nextInt();
@@ -54,6 +55,10 @@ public class Shop {
                     Admin.adminMenu(sc);
                     break;
                 case 6:
+                    System.out.println("您选择的菜单是:切换用户");
+                    username = User.login(sc);
+                    break;
+                case 7:
                     System.out.println("退出系统");
                     System.out.println("谢谢使用");
                     System.exit(0);
@@ -121,6 +126,7 @@ public class Shop {
 
     private static void showPurchased(String username) {
         ArrayList<His> arr = hisManager.load();
+        if (arr.isEmpty()) System.out.println("无购买历史");
         for (His h : arr) {
             if (h.getUsername().equals(username)) {
                 System.out.println(h.toString2());

@@ -14,7 +14,7 @@ public class goodManager {
         try{
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
-            String sql = "select * from Good";
+            String sql = "select * from Good ORDER BY price DESC;";
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
